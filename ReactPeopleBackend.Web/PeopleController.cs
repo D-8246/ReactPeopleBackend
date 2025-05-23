@@ -30,12 +30,22 @@ namespace ReactPeopleBackend.Web
         }
 
         [HttpPost]
-        [Route("delete")]
-        public void Delete(DeleteViewModel dvm)
+        [Route("deleteall")]
+        public void DeleteAll(DeleteViewModel dvm)
         {
             var repo = new PeopleRepository(_connectionString);
-            repo.Delete(dvm.Ids);
+            repo.DeleteAll(dvm.Ids);
         }
+
+        [HttpPost]
+        [Route("update")]
+        public void Update(Person person)
+        {
+            var repo = new PeopleRepository(_connectionString);
+            repo.Update(person);
+        }
+
+
     }
 }
 

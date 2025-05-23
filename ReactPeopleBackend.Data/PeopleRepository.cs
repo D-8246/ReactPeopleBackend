@@ -28,12 +28,26 @@ namespace ReactPeopleBackend.Data
             ctx.SaveChanges();
         }
 
-        public void Delete(List<int> ids)
+        public void DeleteAll(List<int> ids)
         {
             var ctx = new PeopleDataContext(_connectionString);
             var peopleToDelete = ctx.People.Where(p => ids.Contains(p.Id));
             ctx.People.RemoveRange(peopleToDelete);
             ctx.SaveChanges();
         }
+
+        public void Update(Person person)
+        {
+            var ctx = new PeopleDataContext(_connectionString);
+            var p = ctx.People.FirstOrDefault(p => p.Id == person.Id);
+            if(person != null)
+            {
+                p.FirstName = person.FirstName;
+                p.LastName = person.LastName;
+                p.Age = person.Age;
+            }
+            ctx.SaveChanges();
+        }
+
     }
 }
